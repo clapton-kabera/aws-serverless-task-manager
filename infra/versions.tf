@@ -28,6 +28,11 @@ terraform {
       source  = "hashicorp/local"
       version = "~> 2.9.1"
     }
+
+    archive = {
+      source = "hashicorp/archive"
+      version = "~> 2.8.0"
+    }
   }
 
   backend "s3" {
