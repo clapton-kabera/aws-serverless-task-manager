@@ -28,4 +28,12 @@ echo "Enabling versioning..."
 aws s3api put-bucket-versioning --bucket "${BUCKET_NAME}" \
     --versioning-configuration Status=Enabled
 
+# block public access to the s3 bucket
+echo "Blocking public access..."
+aws s3api put-public-access-block \
+    --bucket "${BUCKET_NAME}" \
+    --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+
+
+
 echo "Done..."
