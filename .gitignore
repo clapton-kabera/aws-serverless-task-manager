@@ -1,0 +1,115 @@
+# ==========================================
+# 1. Operating System Files
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.trash/
+
+# ==========================================
+# 2. Security, Environment, and Secrets
+# ==========================================
+# Never commit private credentials or API keys!
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+*.pem
+*.key
+*.secret
+*.passwd
+
+# ==========================================
+# 3. Common IDEs and Editors
+# ==========================================
+# VS Code
+.vscode/
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains (IntelliJ, WebStorm, PyCharm, etc.)
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Text Editors
+*.swp
+*~
+.project
+.settings/
+
+# ==========================================
+# 4. Logs, Diagnostics, and Databases
+# ==========================================
+*.log
+*.sql
+*.sqlite
+*.dump
+crash_dumps/
+
+# ==========================================
+# 5. Generic Build Outputs and Packages
+# ==========================================
+build/
+dist/
+out/
+target/
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+#=========================================
+# 6. terraform files
+#=========================================
+!./infra/example.tfvars
+*.terraform/
+*.tfstate*
+crash.log
+*.tfvars
+
+#=========================================
+# 7. ansible inventory
+#=========================================
+ansible/inventory.ini
+ansible/ansible-env/
+
+#=========================================
+# 8. Python
+#=========================================
+__pycache__/
+.venv/
+.pytest_cache/
+*.pyc
+
+#=========================================
+# AWS SAM
+#=========================================
+.aws-sam
+.aws-sam-iacs
+
+#=========================================
+# Node Modules
+#=========================================
+node_modules/
+dist/
