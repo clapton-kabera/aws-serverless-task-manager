@@ -1,5 +1,5 @@
 # ==========================================
-# 1. Operating System Files
+# Operating System Files
 # ==========================================
 # macOS
 .DS_Store
@@ -21,21 +21,19 @@ $RECYCLE.BIN/
 .trash/
 
 # ==========================================
-# 2. Security, Environment, and Secrets
+# Security, Environment, and Secrets
 # ==========================================
 # Never commit private credentials or API keys!
 *.env
-*.env.local
-*.env.development.local
-*.env.test.local
-*.env.production.local
+*.env.*
+!.env.example
 *.pem
 *.key
 *.secret
 *.passwd
 
 # ==========================================
-# 3. Common IDEs and Editors
+# Common IDEs and Editors
 # ==========================================
 # VS Code
 .vscode/
@@ -50,21 +48,21 @@ $RECYCLE.BIN/
 
 # Text Editors
 *.swp
-*~
 .project
 .settings/
 
 # ==========================================
-# 4. Logs, Diagnostics, and Databases
+# Logs, Diagnostics, and Databases
 # ==========================================
 *.log
+!docs/evidence/**
 *.sql
 *.sqlite
 *.dump
 crash_dumps/
 
 # ==========================================
-# 5. Generic Build Outputs and Packages
+# Generic Build Outputs and Packages
 # ==========================================
 build/
 dist/
@@ -80,22 +78,18 @@ target/
 *.7z
 
 #=========================================
-# 6. terraform files
+# terraform files
 #=========================================
-!./infra/example.tfvars
 *.terraform/
 *.tfstate*
 crash.log
 *.tfvars
+!infra/example.tfvars
+*.tfplan
+tfplan
 
 #=========================================
-# 7. ansible inventory
-#=========================================
-ansible/inventory.ini
-ansible/ansible-env/
-
-#=========================================
-# 8. Python
+# Python
 #=========================================
 __pycache__/
 .venv/
@@ -112,4 +106,3 @@ __pycache__/
 # Node Modules
 #=========================================
 node_modules/
-dist/
