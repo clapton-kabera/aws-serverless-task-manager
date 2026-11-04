@@ -51,5 +51,5 @@ resource "aws_lambda_permission" "api_gateway_perm" {
   function_name = aws_lambda_function.hello_function.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_apigateway_api.serverless_gateway.execution_arn}/*/*"
+  source_arn = "${aws_apigatewayv2_api.serverless_gateway.execution_arn}/*/*"
 }
