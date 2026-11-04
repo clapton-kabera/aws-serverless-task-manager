@@ -11,27 +11,12 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 6.70.0"
-    }
-
-    http = {
-      source  = "hashicorp/http"
-      version = "~> 3.6.3"
-    }
-
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.4.2"
-    }
-
-    local = {
-      source  = "hashicorp/local"
-      version = "~> 2.9.1"
+      version = "~> 6.70"
     }
 
     archive = {
       source = "hashicorp/archive"
-      version = "~> 2.8.0"
+      version = "~> 2.8"
     }
   }
 
@@ -43,5 +28,3 @@ terraform {
     use_lockfile = true
   }
 }
-
-
