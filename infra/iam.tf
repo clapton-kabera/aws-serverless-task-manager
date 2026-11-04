@@ -28,8 +28,8 @@ data "aws_iam_policy_document" "log_policy_doc" {
   Create an IAM policy that allows a role to create log streams and put log streams in cloudwatch only
 */
 resource "aws_iam_policy" "lambda_logging" {
-  name = "lambda_logging_policy"
-  path = "/"
+  name        = "lambda_logging_policy"
+  path        = "/"
   description = "IAM policy for logging to cloudwatch from a lambda function"
 
   policy = data.aws_iam_policy_document.log_policy_doc.json
@@ -48,7 +48,7 @@ resource "aws_iam_role" "lambda_role" {
       Statement = [{
         Action = "sts:AssumeRole"
         Effect = "Allow"
-        Sid = ""
+        Sid    = ""
         Principal = {
           Service = "lambda.amazonaws.com"
         }
@@ -57,7 +57,7 @@ resource "aws_iam_role" "lambda_role" {
   )
 
   tags = {
-    service = "lambda"
+    service     = "lambda"
     description = "lambda role for what the lambda function can do"
   }
 }
@@ -66,6 +66,6 @@ resource "aws_iam_role" "lambda_role" {
   Now we can define what policies/privilges that this role will have
 */
 resource "aws_iam_role_policy_attachment" "lambda_policy" {
-  role = aws_iam_role.lambda_role.name
+  role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.lambda_logging.arn
 }

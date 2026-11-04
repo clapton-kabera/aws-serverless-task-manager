@@ -12,13 +12,13 @@ variable "region" {
 }
 
 variable "lambda_function_name" {
-  type = string
+  type        = string
   description = "The name of the lambda function."
-  default = "say_hello_function"
+  default     = "say_hello_function"
 }
 
 variable "api_gateway_name" {
-  type = string
+  type        = string
   description = "Name of the api gateway"
-  default = "serverless_gateway"
+  default     = "serverless_gateway"
 }
