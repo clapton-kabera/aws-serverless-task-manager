@@ -21,7 +21,7 @@ def lambda_handler(event, context):
       "body": json.dumps(
         {
           "message": "hello",
-          "claims": claims
+          "claims": claims,
           "method": method
         }
       )

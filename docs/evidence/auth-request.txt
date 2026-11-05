@@ -1,0 +1,7 @@
+HTTP/2 200 
+date: Thu, 05 Nov 2026 13:36:08 GMT
+content-type: application/json
+content-length: 561
+apigw-requestid: GXnrYhppjoEEMOw=
+
+{"message": "hello", "claims": {"auth_time": "1793885528", "client_id": "43h7qiehnftr3e1ou7u4hp5838", "cognito:groups": "[admin]", "event_id": "12a2bdd3-29db-4d95-9e40-977162296f27", "exp": "1793889128", "iat": "1793885528", "iss": "https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_GK0zMVKcX", "jti": "87c109d5-fd34-4bef-a131-1098e56c44fe", "origin_jti": "b60f71b6-b385-4e23-8d84-f207dfda9538", "scope": "aws.cognito.signin.user.admin", "sub": "a2054404-b0d1-7013-72ac-b5712e03afde", "token_use": "access", "username": "admin@admin.test"}, "method": "GET"}
