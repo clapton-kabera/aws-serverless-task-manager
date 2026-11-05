@@ -35,6 +35,8 @@ resource "aws_apigatewayv2_route" "function_route" {
   route_key = "GET /hello"
 
   target = "integrations/${aws_apigatewayv2_integration.gateway_lambda_integration.id}"
+  authorizer_id = aws_apigatewayv2_authorizer.cognito.id
+  authorization_type = "JWT"
 }
 
 /*
@@ -44,4 +46,19 @@ resource "aws_apigatewayv2_stage" "staged_gateway" {
   api_id      = aws_apigatewayv2_api.serverless_gateway.id
   name        = "$default"
   auto_deploy = true
+}
+
+/*
+  Attach the cognito auth capabilities on the api gateway so that each request needs to auth'd
+*/
+resource "aws_apigatewayv2_authorizer" "cognito" {
+  api_id           = aws_apigatewayv2_api.serverless_gateway.id
+  authorizer_type  = "JWT"
+  identity_sources = ["$request.header.Authorization"]
+  name             = "cognito-jwt"
+
+  jwt_configuration {
+    issuer   = "https://${aws_cognito_user_pool.lambda_users.endpoint}"
+    audience = [aws_cognito_user_pool_client.pool_client.id]
+  }
 }
