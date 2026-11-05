@@ -10,6 +10,7 @@ import json
 
 def lambda_handler(event, context):
   method = event["requestContext"]["http"]["method"]
+  claims = event["requestContext"]["authorizer"]["jwt"]["claims"]
 
   if (method == "GET"):
     return {
@@ -20,6 +21,7 @@ def lambda_handler(event, context):
       "body": json.dumps(
         {
           "message": "hello",
+          "claims": claims
           "method": method
         }
       )
