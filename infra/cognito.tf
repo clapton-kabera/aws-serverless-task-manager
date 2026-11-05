@@ -31,6 +31,20 @@ resource "aws_cognito_user_pool" "lambda_users" {
   }
 }
 
+/* Create the admin user group */
+resource "aws_cognito_user_group" "admin_group" {
+  name         = "admin"
+  user_pool_id = aws_cognito_user_pool.lambda_users.id
+  precedence   = 5
+}
+
+/* Create the member user group */
+resource "aws_cognito_user_group" "member_group" {
+  name         = "member"
+  user_pool_id = aws_cognito_user_pool.lambda_users.id
+  precedence   = 1
+}
+
 /*
   Create permissions for a client (our frontend in this case) to access the user pool storage to authenticate
   users

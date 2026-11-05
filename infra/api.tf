@@ -34,8 +34,8 @@ resource "aws_apigatewayv2_route" "function_route" {
   api_id    = aws_apigatewayv2_api.serverless_gateway.id
   route_key = "GET /hello"
 
-  target = "integrations/${aws_apigatewayv2_integration.gateway_lambda_integration.id}"
-  authorizer_id = aws_apigatewayv2_authorizer.cognito.id
+  target             = "integrations/${aws_apigatewayv2_integration.gateway_lambda_integration.id}"
+  authorizer_id      = aws_apigatewayv2_authorizer.cognito.id
   authorization_type = "JWT"
 }
 
