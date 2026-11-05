@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #----------------------------------------------------------------------------------------------------
-# create_s3_bucket.sh
+# admin_setup.sh
 # author: Kabera Clapton
 #
 # description: A script that creates an s3 bucket for remote backend
