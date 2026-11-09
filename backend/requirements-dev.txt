@@ -1,0 +1,4 @@
+# Test-only dependencies. Not deployed: Lambda's Python runtime already includes boto3.
+boto3
+moto[dynamodb,cognitoidp]
+pytest

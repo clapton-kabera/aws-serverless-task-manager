@@ -1,0 +1,611 @@
+/*
+  styles.css
+  author: Kabera Clapton
+
+  description: Field Tasks visual design. The idea is a field job card: cool concrete-grey paper,
+               survey-marker blue for actions, safety yellow for work in progress, and the deadline
+               set large in a condensed signage face (Barlow Condensed) because "when is this due?"
+               is the first question a field worker has. Body text is Barlow, from the same family.
+*/
+
+:root {
+  --paper: #eef1f3;
+  --sheet: #ffffff;
+  --ink: #17212b;
+  --ink-soft: #4d5b68;
+  --rule: #cfd6dc;
+  --marker: #1d4e89;
+  --marker-dark: #143a68;
+  --hivis: #f2b705;
+  --done: #2e7d4f;
+  --late: #b3261e;
+
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+
+  --radius: 4px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1,
+h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--hivis);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- sign-in (Amplify UI theme) ---------- */
+
+[data-amplify-authenticator] {
+  --amplify-fonts-default-variable: var(--body);
+  --amplify-fonts-default-static: var(--body);
+  --amplify-colors-brand-primary-10: #e6eef8;
+  --amplify-colors-brand-primary-80: var(--marker);
+  --amplify-colors-brand-primary-90: var(--marker-dark);
+  --amplify-colors-brand-primary-100: var(--marker-dark);
+  --amplify-components-authenticator-router-border-color: var(--rule);
+  --amplify-components-authenticator-router-box-shadow: none;
+  min-height: 100vh;
+}
+
+.signin-header {
+  text-align: center;
+  padding: var(--space-8) var(--space-4) var(--space-4);
+}
+
+.signin-header h1 {
+  font-size: 2.5rem;
+  margin-top: var(--space-2);
+}
+
+.signin-header p {
+  color: var(--ink-soft);
+  margin: var(--space-2) 0 0;
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background: var(--ink);
+  color: #fff;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.account-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role {
+  padding: 0 var(--space-2);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.role-admin {
+  background: var(--hivis);
+  color: var(--ink);
+}
+
+.role-member {
+  border: 1px solid #ffffff66;
+}
+
+.topbar .button-quiet {
+  color: #fff;
+  border-color: #ffffff66;
+}
+
+/* ---------- layout ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(20rem, 26rem) 1fr;
+  gap: var(--space-6);
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+.toolbar {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.filter select {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--sheet);
+}
+
+.page-message,
+.list-empty,
+.panel-empty {
+  color: var(--ink-soft);
+}
+
+.page-message {
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.panel-empty {
+  display: grid;
+  place-items: center;
+  min-height: 16rem;
+  border: 2px dashed var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.load-more {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+/* ---------- task list ---------- */
+
+.task-group + .task-group {
+  margin-top: var(--space-6);
+}
+
+.group-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+}
+
+.group-count {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.task-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.task-row {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  background: var(--sheet);
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-left: 6px solid var(--marker); /* the job card's coloured tab */
+  cursor: pointer;
+}
+
+.task-row:hover {
+  background: #f7f9fb;
+}
+
+.task-row.is-selected {
+  background: #e6eef8;
+}
+
+.task-row.urgency-overdue {
+  border-left-color: var(--late);
+}
+
+.task-row.urgency-today {
+  border-left-color: var(--hivis);
+}
+
+.task-row.urgency-done {
+  border-left-color: var(--done);
+}
+
+.task-row-due {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.1;
+}
+
+.urgency-overdue .task-row-due {
+  color: var(--late);
+}
+
+.task-row-title {
+  font-weight: 600;
+}
+
+.task-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.task-row-assignee {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+/* ---------- status stamp ---------- */
+
+.stamp {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border: 2px solid currentColor;
+  border-radius: var(--radius);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.stamp-open {
+  color: var(--marker);
+}
+
+.stamp-in_progress {
+  color: var(--ink);
+  background: var(--hivis);
+  border-color: var(--hivis);
+}
+
+.stamp-done {
+  color: var(--done);
+}
+
+/* ---------- detail sheet ---------- */
+
+.sheet {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+
+.back {
+  display: none;
+  margin-bottom: var(--space-4);
+}
+
+.due-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  background: var(--marker);
+  color: #fff;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.due-banner.urgency-today {
+  background: var(--hivis);
+  color: var(--ink);
+}
+
+.due-banner.urgency-overdue {
+  background: var(--late);
+}
+
+.due-banner.urgency-done {
+  background: var(--done);
+}
+
+.due-banner-label {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+.due-banner-date {
+  font-weight: 500;
+}
+
+.sheet-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.sheet-title {
+  font-size: 2rem;
+}
+
+.sheet-meta {
+  color: var(--ink-soft);
+  margin: var(--space-1) 0 var(--space-4);
+}
+
+.block {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+.block-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+}
+
+.instructions {
+  white-space: pre-wrap;
+  max-width: 70ch;
+  margin: 0;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.small {
+  font-size: 0.875rem;
+  margin: var(--space-2) 0 0;
+}
+
+.files {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-3);
+}
+
+.files li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.files a {
+  color: var(--marker);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.history {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history li {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.history-when {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+/* ---------- forms and buttons ---------- */
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+  font-weight: 600;
+}
+
+.field small {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: #fff;
+  font-weight: 400;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem; /* comfortable touch target for gloved/outdoor use */
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--marker);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  color: var(--marker);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #e6eef8;
+}
+
+.button-primary {
+  background: var(--marker);
+  color: #fff;
+}
+
+.button-primary:hover {
+  background: var(--marker-dark);
+  border-color: var(--marker-dark);
+}
+
+.button-quiet {
+  border-color: var(--rule);
+  color: var(--ink);
+  background: transparent;
+}
+
+.button:disabled,
+.button.is-busy {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.upload:focus-within {
+  outline: 3px solid var(--hivis);
+  outline-offset: 2px;
+}
+
+.notice {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--marker);
+  background: #e6eef8;
+}
+
+.notice-error {
+  border-left-color: var(--late);
+  background: #fbe9e7;
+}
+
+.notice-info {
+  border-left-color: var(--done);
+  background: #e7f3ec;
+}
+
+/* ---------- small screens: list OR detail, not both ---------- */
+
+@media (max-width: 48rem) {
+  .topbar {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .account-email {
+    display: none;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    padding: var(--space-4);
+  }
+
+  .layout-panel-open .list-column,
+  .layout:not(.layout-panel-open) .panel-column {
+    display: none;
+  }
+
+  .back {
+    display: inline-flex;
+  }
+
+  .sheet {
+    padding: var(--space-4);
+  }
+
+  .due-banner {
+    margin: calc(var(--space-4) * -1) calc(var(--space-4) * -1) var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .history li {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
