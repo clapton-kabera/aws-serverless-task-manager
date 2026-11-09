@@ -1,0 +1,17 @@
+Attachment test run 2026-11-09T14:36:20Z
+Using task ee650ae2-6df0-463d-a788-00227bc0c78a
+[PASS] Request upload for readings.txt (HTTP 201)
+[PASS] Upload directly to S3 (HTTP 204)
+[PASS] S3 rejects a file over 10 MB (signed size limit) (HTTP 400)
+S3 said: <Code>EntityTooLarge</Code>
+[FAIL] S3 rejects a different content type (signed policy): got 204, expected 403
+S3 said: 
+[PASS] API rejects a disallowed type (HTTP 400)
+[PASS] List attachments (HTTP 200)
+listing: readings.txt 42 2026-11-09T14:36:38Z
+readings.txt 42 2026-11-09T14:36:54Z
+[PASS] Download with the presigned URL (HTTP 200)
+[PASS] Downloaded file matches the upload byte for byte
+[PASS] Bucket is not public (direct URL without signature) (HTTP 403)
+
+1 CHECK(S) FAILED. See /home/kabera/amalitech/DevOps-Labs/aws-serverless-task-manager/scripts/../docs/evidence/07-attachments.txt

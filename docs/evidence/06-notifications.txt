@@ -1,0 +1,45 @@
+Notification test run 2026-11-09T14:32:55Z
+
+=== SNS subscriptions (PendingConfirmation = link not clicked yet; no mail until it is)
+-----------------------------------------------------------------------------------------------------------------------------------------------
+|                                                          ListSubscriptionsByTopic                                                           |
++--------------------------------+------------------------------------------------------------------------------------------------------------+
+|  kaberaclaptongahenda@gmail.com|  arn:aws:sns:eu-west-1:771826808190:task-manager-task-notifications:d2024fa3-ac14-4baf-a821-6c111ad80814   |
+|  ckabera6@gmail.com            |  arn:aws:sns:eu-west-1:771826808190:task-manager-task-notifications:41bbc260-186c-48bf-8e44-01038c62fa8b   |
++--------------------------------+------------------------------------------------------------------------------------------------------------+
+
+=== Create a task due in 2 hours (expect a 'New task assigned' email to kaberaclaptongahenda@gmail.com)
+[PASS] create task (201)
+task: ee650ae2-6df0-463d-a788-00227bc0c78a
+
+=== Waiting 20s for the stream notifier, then its recent logs
+2026-11-09T14:31:37.339000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca INIT_START Runtime Version: python:3.14.mainline.v114	Runtime Version ARN: arn:aws:lambda:eu-west-1::runtime:556c9d658b959feae484e52266d26285d22193fcbf78dfbc41a8c107dc7cc43b
+2026-11-09T14:31:37.630000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca START RequestId: 308e4cca-e3f8-447a-a081-7a684784a85d Version: $LATEST
+2026-11-09T14:31:37.680000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca [INFO]	2026-11-09T14:31:37.680Z	308e4cca-e3f8-447a-a081-7a684784a85d	Found credentials in environment variables.
+2026-11-09T14:31:38.522000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca [INFO]	2026-11-09T14:31:38.522Z	308e4cca-e3f8-447a-a081-7a684784a85d	{"records": 1, "failed": 0}
+2026-11-09T14:31:38.524000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca END RequestId: 308e4cca-e3f8-447a-a081-7a684784a85d
+2026-11-09T14:31:38.524000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca REPORT RequestId: 308e4cca-e3f8-447a-a081-7a684784a85d	Duration: 893.71 ms	Billed Duration: 1182 ms	Memory Size: 256 MB	Max Memory Used: 92 MB	Init Duration: 287.74 ms
+2026-11-09T14:31:42.973000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca START RequestId: 73763289-05fa-4a82-9892-4de94f87522b Version: $LATEST
+2026-11-09T14:31:42.988000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca [INFO]	2026-11-09T14:31:42.988Z	73763289-05fa-4a82-9892-4de94f87522b	{"records": 1, "failed": 0}
+2026-11-09T14:31:42.990000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca END RequestId: 73763289-05fa-4a82-9892-4de94f87522b
+2026-11-09T14:31:42.990000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca REPORT RequestId: 73763289-05fa-4a82-9892-4de94f87522b	Duration: 16.38 ms	Billed Duration: 17 ms	Memory Size: 256 MB	Max Memory Used: 92 MB
+2026-11-09T14:34:02.417000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca START RequestId: 27dc5d9f-f401-4522-925b-f66990fd82e6 Version: $LATEST
+2026-11-09T14:34:02.547000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca [INFO]	2026-11-09T14:34:02.546Z	27dc5d9f-f401-4522-925b-f66990fd82e6	{"records": 1, "failed": 0}
+2026-11-09T14:34:02.549000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca END RequestId: 27dc5d9f-f401-4522-925b-f66990fd82e6
+2026-11-09T14:34:02.549000+00:00 2026/11/09/[$LATEST]7424b6292752467b96ad09a9e08811ca REPORT RequestId: 27dc5d9f-f401-4522-925b-f66990fd82e6	Duration: 131.07 ms	Billed Duration: 132 ms	Memory Size: 256 MB	Max Memory Used: 92 MB
+
+=== Deadline reminder, first run (expect at least 1 sent)
+remindersSent: 1
+[PASS] first run sent reminders
+
+=== Deadline reminder, second run (expect 0: each task is reminded once)
+[PASS] second run sends nothing (0)
+
+=== Manual nudge (expect a 'Reminder:' email)
+[PASS] POST /tasks/{id}/notify (200)
+response: {"notified": "kaberaclaptongahenda@gmail.com", "taskId": "ee650ae2-6df0-463d-a788-00227bc0c78a"}
+
+=== Dead-letter queue (expect 0 failed notifications)
+[PASS] DLQ is empty (0)
+
+ALL CHECKS PASSED. Now screenshot the 3 emails (kaberaclaptongahenda@gmail.com inbox) into docs/evidence/.

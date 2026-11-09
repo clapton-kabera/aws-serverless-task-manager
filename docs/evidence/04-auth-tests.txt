@@ -1,0 +1,14 @@
+
+=== 1. No token: expect 401 (2026-11-09T13:31:51Z) ===
+{"message":"Unauthorized"}
+HTTP 401
+
+=== 2. Valid access token for ckabera6@gmail.com: expect 200 (2026-11-09T13:32:02Z) ===
+{"message": "hello", "method": "GET"}
+HTTP 200
+
+=== 3. Tampered token: expect 401 (2026-11-09T13:32:03Z) ===
+{"message":"Unauthorized"}
+HTTP 401
+
+Evidence written to /home/kabera/amalitech/DevOps-Labs/aws-serverless-task-manager/scripts/../docs/evidence/04-auth-tests.txt

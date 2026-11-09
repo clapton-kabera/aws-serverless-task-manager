@@ -1,0 +1,39 @@
+Task API test run 2026-11-09T14:31:02Z against https://d77hj2l6kb.execute-api.eu-west-1.amazonaws.com
+
+=== [PASS] No token is rejected by the authorizer: GET /tasks -> HTTP 401 (expected 401)
+response: {"message":"Unauthorized"}
+
+=== [PASS] Admin lists members: GET /users -> HTTP 200 (expected 200)
+response: {"items": [{"id": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "email": "kaberaclaptongahenda@gmail.com", "enabled": true}]}
+member sub: 12d5a4f4-e061-70df-d034-5550d7fdd8dd
+
+=== [PASS] Member cannot create tasks: POST /tasks -> HTTP 403 (expected 403)
+request:  {"title":"Inspect pump station 4","description":"Check pressure and log readings","deadline":"2026-11-12T14:31:29Z","assigneeId":"12d5a4f4-e061-70df-d034-5550d7fdd8dd"}
+response: {"error": "Admin access required"}
+
+=== [PASS] Admin creates and assigns a task: POST /tasks -> HTTP 201 (expected 201)
+request:  {"title":"Inspect pump station 4","description":"Check pressure and log readings","deadline":"2026-11-12T14:31:29Z","assigneeId":"12d5a4f4-e061-70df-d034-5550d7fdd8dd"}
+response: {"taskId": "35c5f440-6bf4-4266-829a-7ac7cf4e789c", "title": "Inspect pump station 4", "description": "Check pressure and log readings", "status": "OPEN", "assigneeId": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "assigneeEmail": "kaberaclaptongahenda@gmail.com", "deadline": "2026-11-12T14:31:29Z", "createdBy": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "updatedBy": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "createdAt": "2026-11-09T14:31:35Z", "updatedAt": "2026-11-09T14:31:35Z", "version": 1}
+
+=== [PASS] Member sees the task in their list: GET /tasks -> HTTP 200 (expected 200)
+response: {"items": [{"title": "Inspect pump station 4", "assigneeId": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "updatedAt": "2026-11-09T14:31:35Z", "updatedBy": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "assigneeEmail": "kaberaclaptongahenda@gmail.com", "createdBy": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "description": "Check pressure and log readings", "status": "OPEN", "version": 1, "deadline": "2026-11-12T14:31:29Z", "taskId": "35c5f440-6bf4-4266-829a-7ac7cf4e789c", "createdAt": "2026-11-09T14:31:35Z"}], "nextToken": null}
+
+=== [PASS] Member cannot change the title: PUT /tasks/35c5f440-6bf4-4266-829a-7ac7cf4e789c -> HTTP 403 (expected 403)
+request:  {"title":"x","version":1}
+response: {"error": "Members can only change: status"}
+
+=== [PASS] Member moves task to IN_PROGRESS: PUT /tasks/35c5f440-6bf4-4266-829a-7ac7cf4e789c -> HTTP 200 (expected 200)
+request:  {"status":"IN_PROGRESS","version":1}
+response: {"assigneeEmail": "kaberaclaptongahenda@gmail.com", "updatedBy": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "updatedAt": "2026-11-09T14:31:42Z", "createdBy": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "assigneeId": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "deadline": "2026-11-12T14:31:29Z", "description": "Check pressure and log readings", "status": "IN_PROGRESS", "title": "Inspect pump station 4", "createdAt": "2026-11-09T14:31:35Z", "taskId": "35c5f440-6bf4-4266-829a-7ac7cf4e789c", "version": 2}
+
+=== [PASS] Admin with a stale version gets a conflict: PUT /tasks/35c5f440-6bf4-4266-829a-7ac7cf4e789c -> HTTP 409 (expected 409)
+request:  {"title":"Renamed","version":1}
+response: {"error": "Task has changed (current version 2); reload and retry"}
+
+=== [PASS] Admin sees the task with its history: GET /tasks/35c5f440-6bf4-4266-829a-7ac7cf4e789c -> HTTP 200 (expected 200)
+response: {"deadline": "2026-11-12T14:31:29Z", "description": "Check pressure and log readings", "taskId": "35c5f440-6bf4-4266-829a-7ac7cf4e789c", "createdAt": "2026-11-09T14:31:35Z", "assigneeEmail": "kaberaclaptongahenda@gmail.com", "updatedBy": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "title": "Inspect pump station 4", "createdBy": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "status": "IN_PROGRESS", "version": 2, "updatedAt": "2026-11-09T14:31:42Z", "assigneeId": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "history": [{"action": "CREATED", "actor": "a245d4b4-a031-7045-2040-48e95b1d1cc6", "at": "2026-11-09T14:31:35Z", "changes": {"assigneeId": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "deadline": "2026-11-12T14:31:29Z"}}, {"action": "UPDATED", "actor": "12d5a4f4-e061-70df-d034-5550d7fdd8dd", "at": "2026-11-09T14:31:42Z", "changes": {"status": {"from": "OPEN", "to": "IN_PROGRESS"}}}]}
+
+=== [PASS] Unknown task returns 404: GET /tasks/00000000-0000-4000-8000-000000000000 -> HTTP 404 (expected 404)
+response: {"error": "Task not found"}
+
+ALL CHECKS PASSED. Evidence: /home/kabera/amalitech/DevOps-Labs/aws-serverless-task-manager/scripts/../docs/evidence/05-task-api.txt
