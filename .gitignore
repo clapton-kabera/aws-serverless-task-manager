@@ -114,3 +114,5 @@ node_modules/
 # Python Virtual Env Folder
 #========================================= 
 backend/functions/hello/.test-env/*
+
+docs/decisions
