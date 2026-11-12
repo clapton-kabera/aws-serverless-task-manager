@@ -35,8 +35,7 @@ EventBridge Scheduler, CloudWatch) and every resource is defined in Terraform.
 
 ## Architecture
 
-![Architecture diagram](docs/architecture.png)
-<!-- architecture diagram goes here -->
+![Architecture diagram](docs/evidence/serverless.png)
 
 **Request path (synchronous).** The browser loads the React app from **CloudFront**, which reads a
 private **S3** bucket through Origin Access Control. The user signs in against a **Cognito** user
