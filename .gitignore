@@ -115,4 +115,4 @@ node_modules/
 #========================================= 
 backend/functions/hello/.test-env/*
 
-docs/decisions/*
+docs/decisions
